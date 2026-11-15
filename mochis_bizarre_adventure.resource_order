@@ -17,6 +17,8 @@
     {"name":"oStartButton","order":9,"path":"objects/oStartButton/oStartButton.yy",},
     {"name":"oTrampoline","order":7,"path":"objects/oTrampoline/oTrampoline.yy",},
     {"name":"EndScreen","order":3,"path":"rooms/EndScreen/EndScreen.yy",},
+    {"name":"LastLevel","order":6,"path":"rooms/LastLevel/LastLevel.yy",},
+    {"name":"LevelFour","order":7,"path":"rooms/LevelFour/LevelFour.yy",},
     {"name":"LevelThree","order":2,"path":"rooms/LevelThree/LevelThree.yy",},
     {"name":"LevelTwo","order":1,"path":"rooms/LevelTwo/LevelTwo.yy",},
     {"name":"MainMenu","order":4,"path":"rooms/MainMenu/MainMenu.yy",},

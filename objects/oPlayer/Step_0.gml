@@ -1,6 +1,6 @@
 HORIZONTAL_VEL = 3;
-BASE_JUMP_VEL = 5;
-TRAMPOLINE_JUMP_VEL = 30;
+BASE_JUMP_VEL = -5;
+TRAMPOLINE_JUMP_VEL = -30;
 vy += 0.3;
 vx = 0;
 
@@ -25,6 +25,7 @@ if (keyboard_check(ord("R")))
 {
     room_restart();
 }
+
 if (place_meeting(x, y, oOpenDoor))
 {
 	room_goto_next();
@@ -49,15 +50,25 @@ if place_meeting(x, y+1, oBlock) {
         vy = 0
         if keyboard_check(vk_up)
         {
-                vy -= BASE_JUMP_VEL;        
+                vy = BASE_JUMP_VEL;        
         }
 }
 
-else if place_meeting(x, y+1, oTrampoline) {vy -= TRAMPOLINE_JUMP_VEL;}
+else if place_meeting(x, y+1, oTrampoline) {
+	while (place_meeting(x, y, oTrampoline)) {
+        y -= 1;
+    }
+	vy = TRAMPOLINE_JUMP_VEL;
+	}
 
-if (place_meeting(x, y-1, oSolid) && vy < 0) {vy = 0.3;}
 
-if (place_meeting(x, y-1, oSolid) && vy < 0) {vy = 0.3;}
+if (place_meeting(x, y-1, oBlock) && vy < 0) {
+	while (place_meeting(x, y, oBlock)) {
+        y += 1;
+    }
+	vy = 0.3;
+}
+
 
 if place_meeting(x, y, oKey) {
 	key = instance_place(x, y, oKey);
@@ -71,4 +82,27 @@ if place_meeting(x, y, oKey) {
     }
 }
 
-move_and_collide(vx, vy, oSolid)
+move_and_collide(vx, vy, oSolid, 16)
+
+//check overlap with oBlock
+if (place_meeting(x, y, oBlock)) {
+    if (vy < 0) {
+        while (place_meeting(x, y+1, oBlock)) {
+            y += 1;
+        }
+        vy = 0.3;
+    } else if (vy > 0) {
+        while (place_meeting(x, y-1, oBlock)) {
+            y -= 1;
+        }
+        vy = 0;
+    }
+}
+
+//check overlap with otrampoline
+if (place_meeting(x, y, oTrampoline)) {
+     while (place_meeting(x, y, oTrampoline)) {
+            y -= 1;
+     }
+     
+}
